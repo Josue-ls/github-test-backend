@@ -4,7 +4,7 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { catchError, firstValueFrom, map } from 'rxjs';
 import type { AxiosError } from 'axios';
 import { GetCommitsQuery } from './get-commits.query';
-import { CommitsDto } from '../../../dto/commits.dto';
+import { CommitsDto } from '../../dto/commits.dto';
 
 @QueryHandler(GetCommitsQuery)
 export class GetCommitsHandler implements IQueryHandler<GetCommitsQuery> {

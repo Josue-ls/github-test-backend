@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetCommitsQuery } from './queries/get-commits';
-import { CommitsDto } from '../dto/commits.dto';
+import { CommitsDto } from './dto/commits.dto';
 
 @Controller('github')
 @UseInterceptors(ClassSerializerInterceptor)
