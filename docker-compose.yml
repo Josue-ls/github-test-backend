@@ -1,6 +1,7 @@
 version: '3'
 services:
   github-test-backend:
+    container_name: commits-server-api
     build: .
     ports:
       - '3000:3000'
@@ -9,16 +10,6 @@ services:
     environment:
       GITHUB_USERNAME: ${GITHUB_USERNAME}
       GITHUB_TOKEN: ${GITHUB_TOKEN}
-    networks:
-      - commits-net
-  ultrahook-github:
-    image: pena98/ultrahook
-    environment:
-      API_KEY: ${ULTRAHOOK_API_KEY}
-      SUBDOMAIN: github
-      DESTINATION: ${SMEE_GITHUB_ENDPOINT_TARGET}
-    networks:
-      - commits-net
 
 networks:
   commits-net:
