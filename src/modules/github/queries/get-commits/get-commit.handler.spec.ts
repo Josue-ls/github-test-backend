@@ -17,4 +17,17 @@ describe('GetCommitHandler', () => {
     const commits = await handler.execute(new GetCommitsQuery('repo-name'));
     expect((commits as []).length).toBe(0);
   });
+
+  it('should fail', async () => {
+    const mockError = 'Something went wrong';
+    jest.spyOn(mockService, 'get').mockImplementation(() => {
+      throw mockError;
+    });
+
+    try {
+      await handler.execute(new GetCommitsQuery('repo-name'));
+    } catch (error) {
+      expect(error).toBe(mockError);
+    }
+  });
 });
