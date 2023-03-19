@@ -1,8 +1,10 @@
 import {
+  Body,
   ClassSerializerInterceptor,
   Controller,
   Get,
   Param,
+  Post,
   UseInterceptors,
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
@@ -17,5 +19,11 @@ export class GithubController {
   @Get('/commits/:repo')
   async getCommits(@Param('repo') repo: string): Promise<CommitsDto[]> {
     return await this.queryBus.execute(new GetCommitsQuery(repo));
+  }
+
+  @Post('/webhook')
+  async getWebhookCommits(@Body() commit: unknown) {
+    console.log(commit);
+    return [];
   }
 }
