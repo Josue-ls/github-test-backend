@@ -15,6 +15,7 @@ export class GetCommitsHandler implements IQueryHandler<GetCommitsQuery> {
     const GITHUB_URL = `https://api.github.com/repos/${githubUser}/${query.repo}/commits`;
     const headers = {
       Accept: 'application/vnd.github.v3+json',
+      Authorization: process.env.GITHUB_TOKEN,
       'User-Agent': githubUser,
     };
     const { data } = await firstValueFrom(
