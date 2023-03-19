@@ -1,11 +1,12 @@
-import { ICommandHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetRealTimeCommitCommand } from './get-realtime-commit.query';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { GetRealTimeCommitCommand } from './get-realtime-commit.command';
 
-@QueryHandler(GetRealTimeCommitCommand)
+@CommandHandler(GetRealTimeCommitCommand)
 export class GetRealTimeCommitHandler
   implements ICommandHandler<GetRealTimeCommitCommand>
 {
-  async execute(query: GetRealTimeCommitCommand): Promise<any> {
-    throw Error('Not implemented');
+  async execute(command: GetRealTimeCommitCommand): Promise<unknown> {
+    const { body } = command;
+    return body;
   }
 }

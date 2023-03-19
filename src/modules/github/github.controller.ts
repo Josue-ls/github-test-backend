@@ -10,11 +10,15 @@ import {
 import { QueryBus } from '@nestjs/cqrs';
 import { GetCommitsQuery } from './queries/get-commits';
 import { CommitsDto } from './dto/commits.dto';
+import { CommitsGateway } from './utils';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class GithubController {
-  constructor(private readonly queryBus: QueryBus) {}
+  constructor(
+    private readonly queryBus: QueryBus,
+    private readonly commitGateway: CommitsGateway,
+  ) {}
 
   @Get('/commits/:repo')
   async getCommits(@Param('repo') repo: string): Promise<CommitsDto[]> {
@@ -23,7 +27,6 @@ export class GithubController {
 
   @Post('/webhook')
   async getWebhookCommits(@Body() body: unknown) {
-    console.log(body);
-    return [];
+    await this.commitGateway.getCommit(body);
   }
 }
