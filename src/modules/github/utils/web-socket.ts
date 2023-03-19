@@ -1,13 +1,11 @@
 import {
-  WebSocketGateway,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
-  WebSocketServer,
+    OnGatewayConnection,
+    OnGatewayDisconnect, WebSocketGateway, WebSocketServer
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import {
-  GetRealTimeCommitCommand,
-  GetRealTimeCommitHandler,
+    GetRealTimeCommitCommand,
+    GetRealTimeCommitHandler
 } from '../command/get-realtime-commit/';
 
 @WebSocketGateway()
@@ -28,7 +26,6 @@ export class CommitsGateway
   }
 
   async sendCommit(body: unknown) {
-    console.log(body);
     this.server.emit('emitCommit', body);
   }
 
