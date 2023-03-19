@@ -9,7 +9,7 @@ import { QueryBus } from '@nestjs/cqrs';
 import { GetCommitsQuery } from './queries/get-commits';
 import { CommitsDto } from './dto/commits.dto';
 
-@Controller('github')
+@Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class GithubController {
   constructor(private readonly queryBus: QueryBus) {}
