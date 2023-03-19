@@ -1,11 +1,13 @@
 import {
-    OnGatewayConnection,
-    OnGatewayDisconnect, WebSocketGateway, WebSocketServer
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  WebSocketGateway,
+  WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import {
-    GetRealTimeCommitCommand,
-    GetRealTimeCommitHandler
+  GetRealTimeCommitCommand,
+  GetRealTimeCommitHandler,
 } from '../command/get-realtime-commit/';
 
 @WebSocketGateway()
