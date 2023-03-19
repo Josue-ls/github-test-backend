@@ -1,8 +1,10 @@
-import { QueryBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { GithubController } from './github.controller';
-import { mockBuses } from '../../__mocks__/query-bus';
+import { mockBuses } from '../../__mocks__/buses';
 import { GetCommitsQuery } from './queries/get-commits';
+import { CommitsGateway } from './utils';
+import { CommandHandlers } from './command/handler';
 
 describe('Github controller', () => {
   let controller: GithubController;
@@ -12,9 +14,15 @@ describe('Github controller', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [GithubController],
       providers: [
+        CommitsGateway,
+        ...CommandHandlers,
         {
           provide: QueryBus,
           useValue: { execute: bus.query },
+        },
+        {
+          provide: CommandBus,
+          useValue: { execute: bus.command },
         },
       ],
     }).compile();

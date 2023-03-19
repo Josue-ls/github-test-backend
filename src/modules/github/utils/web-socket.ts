@@ -1,3 +1,4 @@
+import { CommandBus } from '@nestjs/cqrs';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -5,10 +6,7 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import {
-  GetRealTimeCommitCommand,
-  GetRealTimeCommitHandler,
-} from '../command/get-realtime-commit/';
+import { GetRealTimeCommitCommand } from '../command/get-realtime-commit/';
 
 @WebSocketGateway()
 export class CommitsGateway
@@ -17,7 +15,7 @@ export class CommitsGateway
   @WebSocketServer()
   server: Server;
 
-  constructor(private readonly getRealTimeCommits: GetRealTimeCommitHandler) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
   async handleConnection(socket: Socket) {
     console.log('Client connected');
@@ -32,7 +30,7 @@ export class CommitsGateway
   }
 
   async getCommit(body: unknown) {
-    const commits = await this.getRealTimeCommits.execute(
+    const commits = await this.commandBus.execute(
       new GetRealTimeCommitCommand(body),
     );
     this.sendCommit(commits);

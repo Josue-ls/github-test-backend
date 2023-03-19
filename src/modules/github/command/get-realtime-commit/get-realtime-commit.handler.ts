@@ -5,7 +5,7 @@ import { GetRealTimeCommitCommand } from './get-realtime-commit.command';
 export class GetRealTimeCommitHandler
   implements ICommandHandler<GetRealTimeCommitCommand>
 {
-  async execute(command: GetRealTimeCommitCommand): Promise<unknown> {
+  async execute(command: GetRealTimeCommitCommand) {
     const { body } = command;
     return body;
   }
