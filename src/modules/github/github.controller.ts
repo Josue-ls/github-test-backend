@@ -26,7 +26,8 @@ export class GithubController {
   }
 
   @Post('/webhook')
-  async getWebhookCommits(@Body() body: unknown) {
+  async getWebhookCommits(@Body() body: { commits: unknown }) {
+    console.log(body.commits);
     await this.commitGateway.getCommit(body);
   }
 }
