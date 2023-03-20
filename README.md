@@ -29,6 +29,8 @@ $ yarn start:dev
 $ yarn start:prod
 ```
 
+Navigate to `http://localhost:3000/`.
+
 ### Test
 
 ```bash
@@ -48,5 +50,8 @@ $ yarn test:cov
 $ docker-compose up --build
 ```
 
+Navigate to `http://localhost:3000/`.
+
 ## NOTE
+
 If you want to see in real-time when it pushes changes to the repository, only going to work with the docker image.
