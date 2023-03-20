@@ -26,7 +26,6 @@ export class CommitsGateway
   }
 
   async sendCommit(body: unknown) {
-    console.log(body);
     this.server.emit('emitCommit', body);
   }
 

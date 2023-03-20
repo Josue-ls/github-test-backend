@@ -6,9 +6,6 @@ import { CommitsGateway } from './web-socket';
 import { mockServer } from '../../../__mocks__/service/socker-service';
 describe('CommitsGateway', () => {
   let gatewayService: CommitsGateway;
-  interface mockBody {
-    body: object;
-  }
   const bus = mockBuses();
 
   beforeEach(async () => {

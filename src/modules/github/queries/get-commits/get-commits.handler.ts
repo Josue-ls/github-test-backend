@@ -12,7 +12,7 @@ export class GetCommitsHandler implements IQueryHandler<GetCommitsQuery> {
 
   async execute(query: GetCommitsQuery): Promise<CommitsDto[]> {
     const githubUser = process.env.GITHUB_USERNAME;
-    const GITHUB_URL = `https://api.github.com/repos/${githubUser}/${query.repo}/commits`;
+    const GITHUB_URL = `${process.env.GITHUB_API_URL}/repos/${githubUser}/${query.repo}/commits`;
     const headers = {
       Accept: 'application/vnd.github.v3+json',
       Authorization: process.env.GITHUB_TOKEN,
