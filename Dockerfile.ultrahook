@@ -1,0 +1,6 @@
+FROM ruby:alpine
+ARG API_KEY
+ARG SUBDOMAIN
+ARG DESTINATION
+RUN gem install ultrahook
+CMD ultrahook -k ${API_KEY} ${SUBDOMAIN} ${DESTINATION}

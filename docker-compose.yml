@@ -1,27 +1,19 @@
 version: '3'
 services:
   github-test-backend:
-    container_name: commits-server-api
     build: .
     ports:
       - '3000:3000'
-    volumes:
-      - .:/app
     environment:
       GITHUB_USERNAME: ${GITHUB_USERNAME}
       GITHUB_TOKEN: ${GITHUB_TOKEN}
-    networks:
-      - commits-net
   ultrahook-github:
-    image: pena98/ultrahook
+    depends_on:
+      - github-test-backend
+    build:
+      context: .
+      dockerfile: Dockerfile.ultrahook
     environment:
       API_KEY: ${ULTRAHOOK_API_KEY}
       SUBDOMAIN: github
-      DESTINATION: ${SMEE_GITHUB_ENDPOINT_TARGET}
-    networks:
-      - commits-net
-
-networks:
-  commits-net:
-    name: external-net
-    driver: bridge
+      DESTINATION: ${ULTRAHOOK_GITHUB_ENDPOINT_TARGET}
