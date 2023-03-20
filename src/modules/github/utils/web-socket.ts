@@ -8,7 +8,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { GetRealTimeCommitCommand } from '../command/get-realtime-commit/';
 
-@WebSocketGateway()
+@WebSocketGateway({ cors: true })
 export class CommitsGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {
