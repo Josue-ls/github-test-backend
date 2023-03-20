@@ -10,8 +10,3 @@ services:
     environment:
       GITHUB_USERNAME: ${GITHUB_USERNAME}
       GITHUB_TOKEN: ${GITHUB_TOKEN}
-
-networks:
-  commits-net:
-    name: external-net
-    driver: bridge
